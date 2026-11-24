@@ -1,1 +1,0 @@
-{"root":["./src/index.ts","./src/bmi/bmi.constants.ts","./src/bmi/bmi.schema.ts","./src/bmi/bmi.types.ts","./src/bmi/index.ts","./src/bmi/tests/bmi.schema.test.ts"],"version":"5.9.3"}

@@ -1,0 +1,8 @@
+export {
+  BMI_CLASSIFICATIONS,
+  BMI_CLASSIFICATION_VALUES,
+  BMI_BOUNDARIES,
+  API_ERROR_CODES,
+} from '@repo/contracts';
+
+export const BMI_PRECISION_DECIMALS = 2;
