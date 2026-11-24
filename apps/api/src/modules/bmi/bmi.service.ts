@@ -1,13 +1,5 @@
-import {
-  BMI_BOUNDARIES,
-  BMI_CLASSIFICATIONS,
-  BMI_PRECISION_DECIMALS,
-} from './bmi.constants.js';
-import type {
-  BmiClassification,
-  CalculateBmiInput,
-  BmiResultData,
-} from './bmi.types.js';
+import { BMI_BOUNDARIES, BMI_CLASSIFICATIONS, BMI_PRECISION_DECIMALS } from './bmi.constants.js';
+import type { BmiClassification, CalculateBmiInput, BmiResultData } from './bmi.types.js';
 
 export class BmiService {
   /**

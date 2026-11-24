@@ -1,4 +1,4 @@
-import { Hono } from 'hono';
+import { Hono, type Context } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { env } from './config/env.js';
@@ -23,7 +23,7 @@ export function createApp(): Hono {
   );
 
   // Health check endpoints
-  const healthHandler = (c: any) =>
+  const healthHandler = (c: Context) =>
     c.json({
       status: 'ok',
       service: 'bmi-api',

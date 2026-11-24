@@ -190,7 +190,7 @@ describe('BmiRoutes — Integration Tests (HTTP)', () => {
       const response = await app.request('/health', { method: 'GET' });
       expect(response.status).toBe(200);
 
-      const json = (await response.json()) as any;
+      const json = (await response.json()) as { status: string; service?: string };
       expect(json.status).toBe('ok');
       expect(json.service).toBe('bmi-api');
     });
@@ -199,7 +199,7 @@ describe('BmiRoutes — Integration Tests (HTTP)', () => {
       const response = await app.request('/api/v1/health', { method: 'GET' });
       expect(response.status).toBe(200);
 
-      const json = (await response.json()) as any;
+      const json = (await response.json()) as { status: string };
       expect(json.status).toBe('ok');
     });
   });

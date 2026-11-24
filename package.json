@@ -3,21 +3,26 @@
   "version": "1.0.0",
   "private": true,
   "description": "Sistema Web Completo para Cálculo de IMC com Arquitetura Orientada a Domínio",
+  "type": "module",
   "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "dev": "pnpm --parallel --filter \"@repo/*\" --filter \"api\" --filter \"web\" dev",
+    "dev": "pnpm --parallel --filter \"api\" --filter \"web\" dev",
     "dev:api": "pnpm --filter api dev",
     "dev:web": "pnpm --filter web dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
     "test:watch": "pnpm -r test --watch",
-    "lint": "pnpm -r lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
     "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.15.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.74.0"
   }
 }

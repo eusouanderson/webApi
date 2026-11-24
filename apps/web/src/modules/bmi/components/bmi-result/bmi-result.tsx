@@ -94,9 +94,7 @@ export const BmiResult: React.FC<BmiResultProps> = ({ result }) => {
                   <tr
                     key={row.key}
                     className={`transition-colors ${
-                      isCurrent
-                        ? 'bg-sky-50/80 font-semibold text-sky-900'
-                        : 'hover:bg-slate-50/60'
+                      isCurrent ? 'bg-sky-50/80 font-semibold text-sky-900' : 'hover:bg-slate-50/60'
                     }`}
                   >
                     <td className="py-2.5 px-3">{row.label}</td>

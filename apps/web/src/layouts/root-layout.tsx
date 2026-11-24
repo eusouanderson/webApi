@@ -52,9 +52,13 @@ export const RootLayout: React.FC = () => {
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-        <Container size="lg" className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <Container
+          size="lg"
+          className="flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
           <p>
-            Desenvolvido com <strong className="font-semibold text-slate-700">TypeScript, Hono, Zod e React</strong>.
+            Desenvolvido com{' '}
+            <strong className="font-semibold text-slate-700">TypeScript, Hono, Zod e React</strong>.
           </p>
           <p className="text-slate-400">
             Arquitetura em Monorepo orientada a domínio &bull; Regra de cálculo 100% no backend.

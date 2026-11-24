@@ -1,15 +1,14 @@
-import { z } from 'zod';
-import {
+import type { z } from 'zod';
+import type {
   calculateBmiInputSchema,
   bmiResultDataSchema,
   calculateBmiSuccessResponseSchema,
   apiErrorDetailSchema,
   apiErrorResponseSchema,
 } from './bmi.schema.js';
-import { BMI_CLASSIFICATIONS } from './bmi.constants.js';
+import type { BMI_CLASSIFICATIONS } from './bmi.constants.js';
 
-export type BmiClassification =
-  (typeof BMI_CLASSIFICATIONS)[keyof typeof BMI_CLASSIFICATIONS];
+export type BmiClassification = (typeof BMI_CLASSIFICATIONS)[keyof typeof BMI_CLASSIFICATIONS];
 
 export type CalculateBmiInput = z.infer<typeof calculateBmiInputSchema>;
 

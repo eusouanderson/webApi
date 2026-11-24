@@ -28,7 +28,8 @@ export function getClassificationConfig(
         colorClass: 'text-sky-700',
         bgColorClass: 'bg-sky-50',
         borderColorClass: 'border-sky-200',
-        description: 'Seu IMC está abaixo de 18,5. Pode indicar necessidade de adequação nutricional.',
+        description:
+          'Seu IMC está abaixo de 18,5. Pode indicar necessidade de adequação nutricional.',
       };
     case BMI_CLASSIFICATIONS.NORMAL:
       return {
@@ -37,7 +38,8 @@ export function getClassificationConfig(
         colorClass: 'text-emerald-700',
         bgColorClass: 'bg-emerald-50',
         borderColorClass: 'border-emerald-200',
-        description: 'Seu IMC está entre 18,5 e 24,9. Faixa considerada saudável para a maioria dos adultos.',
+        description:
+          'Seu IMC está entre 18,5 e 24,9. Faixa considerada saudável para a maioria dos adultos.',
       };
     case BMI_CLASSIFICATIONS.SOBREPESO:
       return {
@@ -46,7 +48,8 @@ export function getClassificationConfig(
         colorClass: 'text-amber-700',
         bgColorClass: 'bg-amber-50',
         borderColorClass: 'border-amber-200',
-        description: 'Seu IMC está acima de 24,9 até 30,0. Recomenda-se atenção aos hábitos de vida.',
+        description:
+          'Seu IMC está acima de 24,9 até 30,0. Recomenda-se atenção aos hábitos de vida.',
       };
     case BMI_CLASSIFICATIONS.OBESIDADE:
       return {
@@ -55,7 +58,8 @@ export function getClassificationConfig(
         colorClass: 'text-rose-700',
         bgColorClass: 'bg-rose-50',
         borderColorClass: 'border-rose-200',
-        description: 'Seu IMC é superior a 30,0. É aconselhável buscar acompanhamento profissional.',
+        description:
+          'Seu IMC é superior a 30,0. É aconselhável buscar acompanhamento profissional.',
       };
     default:
       return {

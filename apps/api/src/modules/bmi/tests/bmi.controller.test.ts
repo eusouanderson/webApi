@@ -17,7 +17,7 @@ describe('BmiController — Unit Tests', () => {
       json: vi.fn((body, status) => ({ body, status })),
     } as unknown as Context;
 
-    const response = (await controller.calculate(mockContext)) as any;
+    const response = await controller.calculate(mockContext);
 
     expect(calculateSpy).toHaveBeenCalledWith({ weight: 70, height: 1.75 });
     expect(mockContext.json).toHaveBeenCalledWith(

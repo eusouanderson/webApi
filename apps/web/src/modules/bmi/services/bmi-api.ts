@@ -47,7 +47,10 @@ export class BmiApiService implements BmiApiClient {
       });
     }
 
-    if (!response.ok || (payload && typeof payload === 'object' && 'success' in payload && !payload.success)) {
+    if (
+      !response.ok ||
+      (payload && typeof payload === 'object' && 'success' in payload && !payload.success)
+    ) {
       const errorPayload = payload as ApiErrorResponse;
       throw new BmiApiError({
         code: errorPayload.error?.code ?? 'API_ERROR',

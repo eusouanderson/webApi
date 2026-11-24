@@ -1,7 +1,7 @@
 import type { Context } from 'hono';
 import { AppError } from '../../common/errors/app-error.js';
 import { calculateBmiInputSchema } from './bmi.schema.js';
-import { BmiService, bmiService } from './bmi.service.js';
+import { type BmiService, bmiService } from './bmi.service.js';
 import type { CalculateBmiSuccessResponse } from './bmi.types.js';
 
 export class BmiController {

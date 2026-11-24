@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { BmiController, bmiController } from './bmi.controller.js';
+import { type BmiController, bmiController } from './bmi.controller.js';
 
 export function createBmiRoutes(controller: BmiController = bmiController): Hono {
   const router = new Hono();

@@ -3,10 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { Button, Input, FormField } from '../../../../components/ui/index.js';
-import {
-  bmiFormValidationSchema,
-  type BmiFormSchemaInput,
-} from './bmi-form.schema.js';
+import { bmiFormValidationSchema, type BmiFormSchemaInput } from './bmi-form.schema.js';
 import type { BmiFormProps } from './bmi-form.types.js';
 
 export const BmiForm: React.FC<BmiFormProps> = ({ onSubmit, onReset, isLoading = false }) => {
