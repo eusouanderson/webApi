@@ -2,6 +2,9 @@
 
 > Sistema web full-stack desenvolvido com arquitetura orientada a domínio (Domain-Driven/Feature-Based), monorepo pnpm, TypeScript estrito, backend REST em Hono e interface moderna em React com Tailwind CSS.
 
+📖 **Documentação Completa de Arquitetura, Funcionamento e Apresentação Acadêmica**:
+Para uma explicação detalhada de cada camada, diagramas de sequência de ponta a ponta e guia de defesa para banca examinadora, consulte o [Manual de Arquitetura e Guia Completo](file:///home/bob/webApi/docs/ARQUITETURA_E_FUNCIONAMENTO.md).
+
 ---
 
 ## 1. Descrição do Projeto
