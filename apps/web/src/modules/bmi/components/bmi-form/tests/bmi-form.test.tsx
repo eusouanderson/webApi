@@ -35,7 +35,7 @@ describe('BmiForm Component', () => {
     expect(handleSubmit).not.toHaveBeenCalled();
   });
 
-  it('deve rejeitar valores menores ou iguais a zero', async () => {
+  it('deve rejeitar valores iguais a zero', async () => {
     const user = userEvent.setup();
     render(<BmiForm onSubmit={vi.fn()} />);
 
@@ -44,7 +44,7 @@ describe('BmiForm Component', () => {
     const submitButton = screen.getByRole('button', { name: /calcular imc/i });
 
     await user.type(weightInput, '0');
-    await user.type(heightInput, '-1');
+    await user.type(heightInput, '0');
     await user.click(submitButton);
 
     await waitFor(() => {
@@ -53,7 +53,23 @@ describe('BmiForm Component', () => {
     });
   });
 
-  it('deve chamar onSubmit com os dados numéricos corretos ao preencher valores válidos', async () => {
+  it('deve aplicar máscara automática de formatação ao digitar nos campos', async () => {
+    const user = userEvent.setup();
+    render(<BmiForm onSubmit={vi.fn()} />);
+
+    const weightInput = screen.getByLabelText(/peso corporal/i) as HTMLInputElement;
+    const heightInput = screen.getByLabelText(/altura/i) as HTMLInputElement;
+
+    // No peso, ponto vira vírgula
+    await user.type(weightInput, '75.5');
+    expect(weightInput.value).toBe('75,5');
+
+    // Na altura, digitação contínua 175 vira 1,75
+    await user.type(heightInput, '175');
+    expect(heightInput.value).toBe('1,75');
+  });
+
+  it('deve chamar onSubmit com os dados numéricos corretos ao preencher valores válidos com máscara', async () => {
     const user = userEvent.setup();
     const handleSubmit = vi.fn();
     render(<BmiForm onSubmit={handleSubmit} />);
@@ -63,7 +79,7 @@ describe('BmiForm Component', () => {
     const submitButton = screen.getByRole('button', { name: /calcular imc/i });
 
     await user.type(weightInput, '80');
-    await user.type(heightInput, '1.75');
+    await user.type(heightInput, '175');
     await user.click(submitButton);
 
     await waitFor(() => {
@@ -88,7 +104,7 @@ describe('BmiForm Component', () => {
     expect(resetButton).toBeDisabled();
   });
 
-  it('deve limpar os campos e acionar onReset ao clicar no botão Limpar', async () => {
+  it('deve limpar os campos mascarados e acionar onReset ao clicar no botão Limpar', async () => {
     const user = userEvent.setup();
     const handleReset = vi.fn();
     render(<BmiForm onSubmit={vi.fn()} onReset={handleReset} />);
@@ -98,9 +114,9 @@ describe('BmiForm Component', () => {
     const resetButton = screen.getByRole('button', { name: /limpar/i });
 
     await user.type(weightInput, '85');
-    await user.type(heightInput, '1.80');
+    await user.type(heightInput, '180');
     expect(weightInput.value).toBe('85');
-    expect(heightInput.value).toBe('1.80');
+    expect(heightInput.value).toBe('1,80');
 
     await user.click(resetButton);
 

@@ -1,34 +1,40 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Calculator, RotateCcw } from 'lucide-react';
 import { Button, Input, FormField } from '../../../../components/ui/index.js';
-import { bmiFormValidationSchema, type BmiFormSchemaInput } from './bmi-form.schema.js';
+import { maskWeight, maskHeight, unmaskNumber } from '../../utils/mask-utils.js';
+import { bmiFormValidationSchema, type BmiFormInputValues } from './bmi-form.schema.js';
 import type { BmiFormProps } from './bmi-form.types.js';
 
 export const BmiForm: React.FC<BmiFormProps> = ({ onSubmit, onReset, isLoading = false }) => {
   const {
-    register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<BmiFormSchemaInput>({
+  } = useForm<BmiFormInputValues>({
     resolver: zodResolver(bmiFormValidationSchema),
     defaultValues: {
-      weight: '' as unknown as number,
-      height: '' as unknown as number,
+      weight: '',
+      height: '',
     },
     mode: 'onTouched',
   });
 
-  const handleFormSubmit = async (values: BmiFormSchemaInput) => {
-    await onSubmit(values as { weight: number; height: number });
+  const handleFormSubmit = async (values: BmiFormInputValues) => {
+    const weight = unmaskNumber(values.weight);
+    const height = unmaskNumber(values.height);
+
+    if (weight !== undefined && height !== undefined) {
+      await onSubmit({ weight, height });
+    }
   };
 
   const handleReset = () => {
     reset({
-      weight: '' as unknown as number,
-      height: '' as unknown as number,
+      weight: '',
+      height: '',
     });
     if (onReset) {
       onReset();
@@ -40,43 +46,65 @@ export const BmiForm: React.FC<BmiFormProps> = ({ onSubmit, onReset, isLoading =
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Campo: Peso */}
+        {/* Campo com máscara: Peso */}
         <FormField
           label="Peso corporal (kg)"
           htmlFor="bmi-weight-input"
           required
-          hint="Ex: 78.5"
+          hint="Digite os dígitos (ex: 80 ou 75,5)"
           error={errors.weight?.message}
         >
-          <Input
-            id="bmi-weight-input"
-            type="number"
-            step="0.1"
-            min="0"
-            placeholder="Digite seu peso em kg"
-            disabled={isBusy}
-            error={!!errors.weight}
-            {...register('weight')}
+          <Controller
+            name="weight"
+            control={control}
+            render={({ field }) => (
+              <Input
+                id="bmi-weight-input"
+                type="text"
+                inputMode="decimal"
+                placeholder="Ex: 80,0"
+                disabled={isBusy}
+                error={!!errors.weight}
+                value={field.value}
+                onChange={(e) => {
+                  const masked = maskWeight(e.target.value);
+                  field.onChange(masked);
+                }}
+                onBlur={field.onBlur}
+                ref={field.ref}
+              />
+            )}
           />
         </FormField>
 
-        {/* Campo: Altura */}
+        {/* Campo com máscara: Altura */}
         <FormField
           label="Altura (metros)"
           htmlFor="bmi-height-input"
           required
-          hint="Ex: 1.75"
+          hint="Digite os dígitos (ex: 175 vira 1,75)"
           error={errors.height?.message}
         >
-          <Input
-            id="bmi-height-input"
-            type="number"
-            step="0.01"
-            min="0"
-            placeholder="Digite sua altura em metros"
-            disabled={isBusy}
-            error={!!errors.height}
-            {...register('height')}
+          <Controller
+            name="height"
+            control={control}
+            render={({ field }) => (
+              <Input
+                id="bmi-height-input"
+                type="text"
+                inputMode="decimal"
+                placeholder="Ex: 1,75"
+                disabled={isBusy}
+                error={!!errors.height}
+                value={field.value}
+                onChange={(e) => {
+                  const masked = maskHeight(e.target.value);
+                  field.onChange(masked);
+                }}
+                onBlur={field.onBlur}
+                ref={field.ref}
+              />
+            )}
           />
         </FormField>
       </div>
